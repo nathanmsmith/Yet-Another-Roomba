@@ -1,6 +1,10 @@
+var $ = require('jquery');
+var nipplejs = require('nipplejs');
+
+
 var socket = io();
 var joystick = nipplejs.create({
-  zone: document.querySelector('.nipple-container'),
+  zone: document.querySelector('.container'),
   color: 'grey'
 });
 
