@@ -4,26 +4,38 @@
     <meta charset="utf-8">
     <title>Roomba Map</title>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="css/app.css">
 
   </head>
   <body>
     <div class="container">
-      <h1>Roomba Map</h1>
+      <h1 class="title">Roomba Map</h1>
       <h3>Attributes</h3>
-      <ul>
-        <li>Distance</li>
-        <li>Angle</li>
-        <li>Cliff Sensors</li>
-        <li>Bump Sensors</li>
-        <li>Wheel Drop Sensors</li>
-        <li>Wall</li>
-        <li>Velocity of Each Drive Wheel</li>
-        <li>Left Encoder Count</li>
-        <li>Right Encoder Count</li>
-      </ul>
-
+      <div class="col-md-4 data-attribute">
+        <span class="data-attribute-label">Distance: </span><span class="distance data-attribute-value"></span>
+      </div>
+      <div class="col-md-4 data-attribute">
+        <span class="data-attribute-label">Angle: </span><span class="angle data-attribute-value"></span>
+      </div>
+      <div class="col-md-4 data-attribute">
+        <span class="data-attribute-label">Cliff Sensors: </span><span class="cliffSensor data-attribute-value"></span>
+      </div>
+      <div class="col-md-4 data-attribute">
+        <span class="data-attribute-label">Bump Sensors: </span><span class="bumpSensor data-attribute-value"></span>
+      </div>
+      <div class="col-md-4 data-attribute">
+        <span class="data-attribute-label">Wheel Drop Sensors: </span><span class="dropSensor data-attribute-value"></span>
+      </div>
+      <div class="col-md-4 data-attribute">
+        <span class="data-attribute-label">Wall: </span><span class="wall data-attribute-value"></span>
+      </div>
+      <div class="col-md-4 data-attribute">
+        <span class="data-attribute-label">Velocity of Each Drive Wheel: </span><span class="velocity data-attribute-value"></span>
+      </div>
+      <div class="col-md-4 data-attribute">
+        <span class="data-attribute-label">Encoder Count: </span><span class="encoderCount data-attribute-value"></span>
+      </div>
     </div>
 
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>

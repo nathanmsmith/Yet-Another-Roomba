@@ -11,6 +11,14 @@ joystick.on('dir:up dir:left dir:down dir:right', function (evt, data) {
 
 socket.on('sensor data', function(msg) {
   // display sensor data
+  $('.distance').text(msg.distance);
+  $('.angle').text(msg.angle);
+  $('.cliffSensor').text(msg.cliffSensor);
+  $('.bumpSensor').text(msg.bumpSensor);
+  $('.dropSensor').text(msg.dropSensor);
+  $('.wall').text(msg.wall);
+  $('.velocity').text(msg.velocity);
+  $('.encoderCount').text(msg.encoderCount);
 });
 
 /*

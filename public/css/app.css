@@ -1,3 +1,18 @@
 .container {
   height: 100%;
 }
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 4em;
+}
+
+.data-attribute-item {
+  font-size: 1.5em;
+}
+
+.data-attribute-label {
+  font-weight: bold;
+  font-size: 1.7em;
+}
