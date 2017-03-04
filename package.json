@@ -2,7 +2,7 @@
   "name": "roomba-map",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +17,14 @@
   },
   "homepage": "https://github.com/nathunsmitty/roomba-map#readme",
   "dependencies": {
-    "nipplejs": "^0.6.7"
+    "express": "^4.15.0",
+    "jquery": "^3.1.1",
+    "nipplejs": "^0.6.7",
+    "socket.io": "^1.7.3"
+  },
+  "devDependencies": {
+    "eslint": "^3.17.0",
+    "eslint-config-airbnb-base": "^11.1.1",
+    "eslint-plugin-import": "^2.2.0"
   }
 }
