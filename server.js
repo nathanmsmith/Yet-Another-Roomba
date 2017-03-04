@@ -45,7 +45,7 @@ io.on('connection', (socket) => {
       velocity: randNum(8, 9),
       encoderCount: randNum(9, 10),
     });
-  }, 500);
+  }, 1000);
 });
 
 http.listen(3000, () => {

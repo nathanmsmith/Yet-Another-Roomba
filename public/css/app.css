@@ -1,4 +1,7 @@
-.container {
+html,
+body,
+.container,
+.nipple-container {
   height: 100%;
 }
 
@@ -14,5 +17,10 @@
 
 .data-attribute-label {
   font-weight: bold;
-  font-size: 1.7em;
+  font-size: 1.3em;
+}
+
+.nipple-container {
+  marign: 0;
+  position: absolute;
 }
