@@ -1,3 +1,19 @@
+var socket = io();
+var joystick = nipplejs.create({
+  zone: document.querySelector('.container'),
+  color: 'grey'
+});
+
+
+joystick.on('dir:up dir:left dir:down dir:right', function (evt, data) {
+  socket.emit('change direction', evt.type);
+});
+
+socket.on('sensor data', function(msg) {
+  // display sensor data
+});
+
+/*
 $(document).keydown(function(e) {
   switch(e.which) {
     case 65: // A
@@ -20,13 +36,4 @@ $(document).keydown(function(e) {
   }
   e.preventDefault(); // prevent the default action (scroll / move caret)
 });
-
-var socket = io();
-$('form').submit(function() {
-  socket.emit('chat message', $('#m').val());
-  $('#m').val('');
-  return false;
-});
-socket.on('chat message', function(msg) {
-  $('#messages').append($('<li>').text(msg));
-});
+*/

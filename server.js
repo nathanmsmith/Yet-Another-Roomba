@@ -12,8 +12,8 @@ app.use('/', router);
 app.use(express.static(__dirname + '/public'));
 
 io.on('connection', (socket) => {
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);
+  socket.on('change direction', (msg) => {
+    console.log('Direction changed: ' + msg);
   });
 });
 
