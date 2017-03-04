@@ -4,38 +4,35 @@
     <meta charset="utf-8">
     <title>Roomba Map</title>
 
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/app.css">
 
   </head>
   <body>
-    <h1>Roomba Map</h1>
-
-    <div class="contents">
+    <div class="container">
+      <h1>Roomba Map</h1>
+      <h3>Attributes</h3>
+      <ul>
+        <li>Distance</li>
+        <li>Angle</li>
+        <li>Cliff Sensors</li>
+        <li>Bump Sensors</li>
+        <li>Wheel Drop Sensors</li>
+        <li>Wall</li>
+        <li>Velocity of Each Drive Wheel</li>
+        <li>Left Encoder Count</li>
+        <li>Right Encoder Count</li>
+      </ul>
 
     </div>
-
-    <h3>Attributes</h3>
-    <ul>
-      <li>Distance</li>
-      <li>Angle</li>
-      <li>Cliff Sensors</li>
-      <li>Bump Sensors</li>
-      <li>Wheel Drop Sensors</li>
-      <li>Wall</li>
-      <li>Velocity of Each Drive Wheel</li>
-      <li>Left Encoder Count</li>
-      <li>Right Encoder Count</li>
-    </ul>
-
     <script src="js/jquery-3.1.1.min.js" charset="utf-8"></script>
     <script src="js/nipplejs.min.js"></script>
     <script>
       var dynamic = nipplejs.create({
-        zone: document.querySelector('.contents'),
+        zone: document.querySelector('.container'),
         color: 'blue'
       });
     </script>
     <script src="js/app.js" charset="utf-8"></script>
-
   </body>
 </html>
