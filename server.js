@@ -20,7 +20,10 @@ var request = require('request');
 
 var coord_url = "http://localhost:666"
 
-
+PythonShell.run('./scripts/data.py', (err) => {
+  if (err) throw err;
+  console.log('Started server.');
+});
 
 position = {x : 0, y : 0};
 
@@ -34,13 +37,8 @@ PythonShell.run('./scripts/start.py', (err) => {
   if (err) throw err;
   console.log('Connected to Rooomba.');
 });
-/*
-var pyshell = new PythonShell('./scripts/data.py');
 
-pyshell.on('message', function (message) {
-  // received a message sent from the Python script (a simple "print" statement)
-  console.log(message);
-});*/
+
 
 function randNum(min, max) {
   return Math.random() * (max - min) + min;

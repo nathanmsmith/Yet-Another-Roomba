@@ -42,8 +42,6 @@
             <span class="data-attribute-label">Encoder Count: </span><span class="encoderCount data-attribute-value"></span>
           </div>
         </div>
-        <h3>Graphs</h3>
-        <canvas id="map" class="col-xs-12"></canvas>
         <h3>Live View</h3>
        <canvas id="board" width="1000" height="1000" class="col-xs-12"></canvas>
     </div>
@@ -69,7 +67,7 @@
 <script type="text/javascript">
         function drawGrid() {
             var cnv = document.getElementById("board");
-            
+
             var gridOptions = {
                 minorLines: {
                     separation: 5,
@@ -97,7 +95,7 @@
 
             ctx.strokeStyle = lineOptions.color;
             ctx.strokeWidth = 1;
-            
+
             ctx.beginPath();
 
             var iCount = null;
