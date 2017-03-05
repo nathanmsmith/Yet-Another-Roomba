@@ -118,8 +118,8 @@ io.on('connection', (socket) => {
 //We must transform the directions given into an x y coord to display as a line
 function parse(body)
 {
-  x_coord = Math.cos(body.angle) * 180/Math.PI
-  y_coord = Math.sin(body.angle) * 180/Math.PI
+  var x_coord = Math.cos(body.angle) * 180/Math.PI * body.distance
+  var y_coord = Math.sin(body.angle) * 180/Math.PI * body.distance
   return {x : x_coord, y : y_coord}
   //return {x : num, y : num}
 }
@@ -136,6 +136,7 @@ setInterval(() => {
       if (!error && response.statusCode === 200) {
         console.log(body) // Print the json response
         //coords = JSON.parse(body)
+        body.angle = totalAngle + body.angle;
         var next = parse(body)
         socket.emit('draw', {beg_x: position.x, beg_y : position.y, end_x : next.x + position.x , end_y : next.y + position.y});
         position.x = next.x;
