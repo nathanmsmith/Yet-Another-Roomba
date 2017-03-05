@@ -140,7 +140,7 @@ setInterval(() => {
         var next = parse(body)
         if(next.distance != 0 && next.angle != 0)
         {
-          socket.emit('draw', {beg_x: position.x, beg_y : position.y, end_x : next.x + position.x , end_y : next.y + position.y});
+          socket.emit('draw', {beg_x: position.x + 500, beg_y : position.y + 500, end_x : next.x + position.x + 500 , end_y : next.y + position.y + 500});
         }
         position.x = next.x;
         position.y = next.y;
