@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/app.css">
 
   </head>
-  <body>
+  <body onload="drawGrid()">
     <div class="container">
         <h1>Roomba Map</h1>
         <h3>Attributes</h3>
@@ -44,7 +44,91 @@
         </div>
         <h3>Graphs</h3>
         <canvas id="map" class="col-xs-12"></canvas>
+        <h3>Live View</h3>
+       <canvas id="board" width="1000" height="1000" class="col-xs-12"></canvas>
     </div>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+        var socket = io.connect();
+        socket.on('draw',function(data){
+            draw(data);
+        });
+        canvas = document.getElementById('board');
+        ctx = canvas.getContext("2d");
+
+        function draw(e) {
+            ctx.strokeStyle = '#333333';
+            ctx.lineTo(e.x, e.y);
+            ctx.stroke();
+        }
+    });
+</script>
+
+<script type="text/javascript">
+        function drawGrid() {
+            var cnv = document.getElementById("board");
+            
+            var gridOptions = {
+                minorLines: {
+                    separation: 5,
+                    color: '#00FF00'
+                },
+                majorLines: {
+                    separation: 50,
+                    color: '#000000'
+                }
+            };
+
+            //drawGridLines(cnv, gridOptions.minorLines);
+            drawGridLines(cnv, gridOptions.majorLines);
+
+            return;
+        }
+
+        function drawGridLines(cnv, lineOptions) {
+
+
+            var iWidth = cnv.width;
+            var iHeight = cnv.height;
+
+            var ctx = cnv.getContext('2d');
+
+            ctx.strokeStyle = lineOptions.color;
+            ctx.strokeWidth = 1;
+            
+            ctx.beginPath();
+
+            var iCount = null;
+            var i = null;
+            var x = null;
+            var y = null;
+
+            iCount = Math.floor(iWidth / lineOptions.separation);
+
+            for (i = 1; i <= iCount; i++) {
+                x = (i * lineOptions.separation);
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, iHeight);
+                ctx.stroke();
+            }
+
+
+            iCount = Math.floor(iHeight / lineOptions.separation);
+
+            for (i = 1; i <= iCount; i++) {
+                y = (i * lineOptions.separation);
+                ctx.moveTo(0, y);
+                ctx.lineTo(iWidth, y);
+                ctx.stroke();
+            }
+
+            ctx.closePath();
+
+            return;
+        }
+
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js" integrity="sha256-lDaoGuONbVHFEV6ZW3GowBu4ECOTjDE14hleNVBvDW8=" crossorigin="anonymous"></script>
     <script src="./bundle.js" charset="utf-8"></script>

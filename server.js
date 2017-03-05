@@ -11,6 +11,7 @@ app.use('/', router);
 
 app.use(express.static(__dirname + '/public'));
 
+/*
 PythonShell.run('./scripts/stop.py', (err) => {
   if (err) throw err;
   console.log('Closed Rooomba.');
@@ -21,7 +22,7 @@ PythonShell.run('./scripts/start.py', (err) => {
   if (err) throw err;
   console.log('Connected to Rooomba.');
 });
-
+*/
 
 function randNum(min, max) {
   return Math.random() * (max - min) + min;
@@ -75,10 +76,10 @@ io.on('connection', (socket) => {
     }
 
     //console.log('Direction changed: ' + msg.direction.angle);
-    PythonShell.run('./scripts/move.py', {args: [velocity, radius]}, (err) => {
+    /* PythonShell.run('./scripts/move.py', {args: [velocity, radius]}, (err) => {
       if (err) throw err;
       console.log('Changed direction of to velocity:' + velocity + ', radius: ' + radius);
-    });
+    }); */
   });
 
   setInterval(() => {
