@@ -23,6 +23,7 @@ var coord_url = "http://localhost:666"
 
 
 position = {x : 0, y : 0};
+totalAngle = 0;
 
 PythonShell.run('./scripts/stop.py', (err) => {
   if (err) throw err;
@@ -118,8 +119,8 @@ io.on('connection', (socket) => {
 //We must transform the directions given into an x y coord to display as a line
 function parse(body)
 {
-  x_coord = Math.cos(body.Angle) * 180/Math.PI
-  y_coord = Math.sin(dody.Angle) * 180/Math.PI
+  x_coord = Math.cos(body.angle) * 180/Math.PI
+  y_coord = Math.sin(body.angle) * 180/Math.PI
   return {x : x_coord, y : y_coord}
   //return {x : num, y : num}
 }
