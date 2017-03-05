@@ -115,6 +115,7 @@ setInterval(() => {
         //console.log(body) // Print the json response
         //coords = JSON.parse(body)
         body.angle = totalAngle + body.angle;
+        totalAngle = body.angle;
         var next = parse(body)
 
         socket.emit('sensor data', {
