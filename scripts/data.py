@@ -26,7 +26,7 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         #s.wfile.write(
 
         bot.get_packet(100)
-        json.dump({'Angle': str(bot.sensor_state["angle"]), 'Distance' : str(bot.sensor_state["distance"])}, s.wfile)
+        json.dump(bot.sensor_state, s.wfile)
 
 if __name__ == '__main__':
     server_class = BaseHTTPServer.HTTPServer
@@ -38,4 +38,3 @@ if __name__ == '__main__':
         pass
     httpd.server_close()
     print time.asctime(), "Server Stops - %s:%s" % (HOST_NAME, PORT_NUMBER)
-
