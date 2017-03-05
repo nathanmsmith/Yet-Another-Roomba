@@ -59,7 +59,8 @@
 
         function draw(e) {
             ctx.strokeStyle = '#333333';
-            ctx.lineTo(e.x, e.y);
+            ctx.moveTo(e.beg_x,e.beg_y);
+            ctx.lineTo(e.end_x, e.end_y);
             ctx.stroke();
         }
     });

@@ -111,8 +111,10 @@ io.on('connection', (socket) => {
     });
   }, 1000);
 
+// draw takes e.beg_x,e.beg_y, e.end_x, e.end_y
+
 setInterval(() => {
-    socket.emit('draw', {x: randNum(0, 90), y : randNum(0, 44)});
+    socket.emit('draw', {beg_x: randNum(0, 90), beg_y : randNum(0, 44), end_x : 1000 , end_y : 1000 });
     });
   }, 1000);
 
