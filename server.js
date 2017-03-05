@@ -116,7 +116,6 @@ setInterval(() => {
         //coords = JSON.parse(body)
         body.angle = totalAngle + body.angle;
         var next = parse(body)
-<<<<<<< HEAD
 
         socket.emit('sensor data', {
           distance: body.distance,
@@ -131,14 +130,11 @@ setInterval(() => {
           cliffRight: body['cliff right'],
         });
 
-
-        socket.emit('draw', {beg_x: position.x, beg_y : position.y, end_x : next.x + position.x , end_y : next.y + position.y});
-=======
         if(next.distance != 0 && next.angle != 0)
         {
           socket.emit('draw', {beg_x: position.x + 500, beg_y : position.y + 500, end_x : next.x + position.x + 500 , end_y : next.y + position.y + 500});
         }
->>>>>>> 52acb94d1d21b4c6ca965a0df04cd4df97071401
+
         position.x = next.x;
         position.y = next.y;
       }
