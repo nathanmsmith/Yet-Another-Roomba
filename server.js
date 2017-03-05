@@ -27,6 +27,18 @@ PythonShell.run('./scripts/start.py', (err) => {
   console.log('Connected to Rooomba.');
 });
 
+var pyshell = new PythonShell('./scripts/data.py');
+
+pyshell.on('message', function (message) {
+  // received a message sent from the Python script (a simple "print" statement)
+  console.log(message);
+});
+
+// end the input stream and allow the process to exit
+pyshell.end(function (err) {
+  if (err) throw err;
+  console.log('finished');
+});
 
 function randNum(min, max) {
   return Math.random() * (max - min) + min;
