@@ -128,6 +128,21 @@ setInterval(() => {
           cliffFrontLeft: body['cliff front left'],
           cliffLeft: body['cliff left'],
           cliffRight: body['cliff right'],
+          bumpCenterLeftSignal: body['light bump center left signal'],
+          bumpLeftSignal: body['light bump center left signal'],
+          bumpFrontLeftSignal: body['light bump front left signal'],
+          bumpCenterRightSignal: body['light bump center right signal'],
+          bumpRightSignal: body['light bump right signal'],
+          bumpFrontRightSignal: body['light bump front right signal'],
+          dropLeft: body['wheel drop and bumps']['drop left'],
+          dropRight: body['wheel drop and bumps']['drop right'],
+          velocity: body['requested velocity'],
+          leftVelocity: body['requested left velocity'],
+          rightVelocity: body['requested right velocity'],
+          leftEncoderCount: body['left encoder counts'],
+          rightEncoderCount: body['right encoder counts'],
+          wallSignal: body['wall signal'],
+          wallSeen: body['wall seen'],
         });
 
         if(next.distance != 0 && next.angle != 0)

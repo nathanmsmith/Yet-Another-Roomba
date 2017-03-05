@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Roomba Map</title>
+    <title>Yet Anther Roomba</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="css/app.css">
@@ -10,50 +10,92 @@
   </head>
   <body onload="drawGrid()">
     <div class="container">
-        <h1>Roomba Map</h1>
+        <h1>Yet Another Roomba</h1>
         <h3>Attributes</h3>
         <div class="row">
           <div class="col-md-4 data-attribute">
-            <span class="data-attribute-label">Distance: </span><span class="distance data-attribute-value"></span>
+            <span class="data-attribute-label">Distance: </span><span class="distance data-attribute-value">0</span>
           </div>
           <div class="col-md-4 data-attribute">
-            <span class="data-attribute-label">Angle: </span><span class="angle data-attribute-value"></span>
+            <span class="data-attribute-label">Angle: </span><span class="angle data-attribute-value">0</span>
           </div>
-
         </div>
         <h3>Cliff Data</h3>
         <div class="row">
+          <div class="col-md-3 data-attribute">
+            <span class="data-attribute-label">Cliff Left: </span><span class="cliffLeftSignal data-attribute-value"></span>
+          </div>
+          <div class="col-md-3 data-attribute">
+            <span class="data-attribute-label">Cliff Front Left: </span><span class="cliffFrontLeftSignal data-attribute-value"></span>
+          </div>
           <div class="col-md-3 data-attribute">
             <span class="data-attribute-label">Cliff Front Right: </span><span class="cliffFrontRightSignal data-attribute-value"></span>
           </div>
           <div class="col-md-3 data-attribute">
             <span class="data-attribute-label">Cliff Right: </span><span class="cliffRightSignal data-attribute-value"></span>
           </div>
-          <div class="col-md-3 data-attribute">
-            <span class="data-attribute-label">Cliff Front Left: </span><span class="cliffFrontLeftSignal data-attribute-value"></span>
+        </div>
+        <h3>Bump Sensors</h3>
+        <div class="row">
+          <div class="col-md-2 data-attribute">
+            <span class="data-attribute-label">Bump Left: </span><span class="bumpLeftSignal data-attribute-value"></span>
           </div>
-          <div class="col-md-3 data-attribute">
-            <span class="data-attribute-label">Cliff Left: </span><span class="cliffLeftSignal data-attribute-value"></span>
+          <div class="col-md-2 data-attribute">
+            <span class="data-attribute-label">Bump Center Left: </span><span class="bumpCenterLeftSignal data-attribute-value"></span>
+          </div>
+          <div class="col-md-2 data-attribute">
+            <span class="data-attribute-label">Bump Front Left: </span><span class="bumpFrontLeftSignal data-attribute-value"></span>
+          </div>
+          <div class="col-md-2 data-attribute">
+            <span class="data-attribute-label">Bump Front Right: </span><span class="bumpFrontRightSignal data-attribute-value"></span>
+          </div>
+          <div class="col-md-2 data-attribute">
+            <span class="data-attribute-label">Bump Center Right: </span><span class="bumpCenterRightSignal data-attribute-value"></span>
+          </div>
+          <div class="col-md-2 data-attribute">
+            <span class="data-attribute-label">Bump Right: </span><span class="bumpRightSignal data-attribute-value"></span>
+          </div>
+        </div>
+        <h3>Velocity</h3>
+        <div class="row">
+          <div class="col-md-4 data-attribute">
+            <span class="data-attribute-label">Velocity: </span><span class="velocity data-attribute-value"></span>
+          </div>
+          <div class="col-md-4 data-attribute">
+            <span class="data-attribute-label">Left Velocity: </span><span class="leftVelocity data-attribute-value"></span>
+          </div>
+          <div class="col-md-4 data-attribute">
+            <span class="data-attribute-label">Right Velocity: </span><span class="rightVelocity data-attribute-value"></span>
           </div>
         </div>
 
+        <h3>Wall?</h3>
         <div class="row">
-          <div class="col-md-4 data-attribute">
-            <span class="data-attribute-label">Bump Sensors: </span><span class="bumpSensor data-attribute-value"></span>
+          <div class="col-md-6 data-attribute">
+            <span class="data-attribute-label">Signal: </span><span class="wallSignal data-attribute-value"></span>
           </div>
-          <div class="col-md-4 data-attribute">
-            <span class="data-attribute-label">Wheel Drop Sensors: </span><span class="dropSensor data-attribute-value"></span>
-          </div>
-          <div class="col-md-4 data-attribute">
-            <span class="data-attribute-label">Wall: </span><span class="wall data-attribute-value"></span>
+          <div class="col-md-6 data-attribute">
+            <span class="data-attribute-label">Wall? </span><span class="wallSeen data-attribute-value"></span>
           </div>
         </div>
+
+        <h3>Dropped?</h3>
         <div class="row">
-          <div class="col-md-4 data-attribute">
-            <span class="data-attribute-label">Velocity of Each Drive Wheel: </span><span class="velocity data-attribute-value"></span>
+          <div class="col-md-6 data-attribute">
+            <span class="data-attribute-label">Left: </span><span class="dropLeft data-attribute-value"></span>
           </div>
-          <div class="col-md-4 data-attribute">
-            <span class="data-attribute-label">Encoder Count: </span><span class="encoderCount data-attribute-value"></span>
+          <div class="col-md-6 data-attribute">
+            <span class="data-attribute-label">Right: </span><span class="dropRight data-attribute-value"></span>
+          </div>
+        </div>
+
+        <h3>Ecoder Counts</h3>
+        <div class="row">
+          <div class="col-md-6 data-attribute">
+            <span class="data-attribute-label">Left Encoder Count: </span><span class="leftEncoderCount data-attribute-value"></span>
+          </div>
+          <div class="col-md-6 data-attribute">
+            <span class="data-attribute-label">Right Encoder Count: </span><span class="rightEncoderCount data-attribute-value"></span>
           </div>
         </div>
         <h3>Live View</h3>

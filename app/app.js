@@ -15,18 +15,36 @@ joystick.on('move', function (evt, data) {
 // Update view when new sensor data is sent
 socket.on('sensor data', function(msg) {
   console.log(msg);
-  $('.distance').text(msg.distance);
-  $('.angle').text(msg.angle);
+
+  // Total distance
+  var distance = parseInt($('.distance').text(), 10);
+  distance += parseInt(msg.distance);
+  $('.distance').text(distance);
+
+  // Total angle
+  var angle = parseInt($('.distance').text(), 10);
+  angle += parseInt(msg.angle);
+  $('.angle').text(angle);
+
   $('.cliffFrontRightSignal').text(msg.cliffFrontRightSignal);
   $('.cliffFrontLeftSignal').text(msg.cliffFrontLeftSignal);
   $('.cliffRightSignal').text(msg.cliffRightSignal);
   $('.cliffLeftSignal').text(msg.cliffLeftSignal);
-  /*
-  $('.bumpSensor').text(msg.bumpSensor.toFixed(5));
-  $('.dropSensor').text(msg.dropSensor.toFixed(5));
-  $('.wall').text(msg.wall.toFixed(5));
-  $('.velocity').text(msg.velocity.toFixed(5));
-  $('.encoderCount').text(msg.encoderCount.toFixed(5));*/
+  $('.bumpCenterLeftSignal').text(msg.bumpCenterLeftSignal);
+  $('.bumpLeftSignal').text(msg.bumpLeftSignal);
+  $('.bumpFrontLeftSignal').text(msg.bumpFrontLeftSignal);
+  $('.bumpCenterRightSignal').text(msg.bumpCenterRightSignal);
+  $('.bumpRightSignal').text(msg.bumpRightSignal);
+  $('.bumpFrontRightSignal').text(msg.bumpFrontRightSignal);
+  $('.leftEncoderCount').text(msg.leftEncoderCount);
+  $('.rightEncoderCount').text(msg.rightEncoderCount);
+  $('.dropLeft').text(msg.dropLeft);
+  $('.dropRight').text(msg.dropRight);
+  $('.velocity').text(msg.velocity);
+  $('.leftVelocity').text(msg.leftVelocity);
+  $('.rightVelocity').text(msg.rightVelocity);
+  $('.wallSignal').text(msg.wallSignal);
+  $('.wallSeen').text(msg.wallSeen);
 });
 
 // TODO: animate numbers
