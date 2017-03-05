@@ -11,10 +11,18 @@ app.use('/', router);
 
 app.use(express.static(__dirname + '/public'));
 
-io.on('connection', function(socket) {
-  socket.broadcast.emit('draw',{x: 0, y : 0}); // The starting point is always 0,0 for the trajectory plot.   
-})
+var request = require('request');
 
+// Not required anymore. 
+//io.on('connection', function(socket) {
+//  socket.broadcast.emit('draw',{x: 0, y : 0}); // The starting point is always 0,0 for the trajectory plot.   
+//})
+
+var coord_url = "http://localhost:666"
+
+
+
+position = {x : 0, y : 0};
 
 PythonShell.run('./scripts/stop.py', (err) => {
   if (err) throw err;
@@ -113,12 +121,26 @@ io.on('connection', (socket) => {
 
 // draw takes e.beg_x,e.beg_y, e.end_x, e.end_y
 
+
+
 setInterval(() => {
     //socket.emit('draw', {beg_x: randNum(0, 90), beg_y : randNum(0, 44), end_x : 1000 , end_y : 1000 });
     });
   }, 1000);
 
+setInterval(() => {
+  request({
+    url: coord_url,
+    json: true
+}, function (error, response, body) {
 
+    if (!error && response.statusCode === 200) {
+        console.log(body) // Print the json response
+    }
+});
+  }, 1000);
+
+// Nota Bene : Plotting the trajectory once per second will be too intensive for Chrome's canva implementation. RIP. 
 
 http.listen(3000, () => {
   console.log('listening on *:3000');
