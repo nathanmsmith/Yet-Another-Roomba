@@ -11,6 +11,10 @@ app.use('/', router);
 
 app.use(express.static(__dirname + '/public'));
 
+io.on('connection', function(socket) {
+  socket.broadcast.emit('draw',{x: 0, y : 0}); // The starting point is always 0,0 for the trajectory plot.   
+})
+
 /*
 PythonShell.run('./scripts/stop.py', (err) => {
   if (err) throw err;
