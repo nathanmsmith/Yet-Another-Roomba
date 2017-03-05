@@ -9,20 +9,24 @@ var joystick = nipplejs.create({
 
 // Tell server when direction change
 joystick.on('move', function (evt, data) {
-  console.log(data);
   socket.emit('change direction', data);
 });
 
 // Update view when new sensor data is sent
 socket.on('sensor data', function(msg) {
-  $('.distance').text(msg.distance.toFixed(5));
-  $('.angle').text(msg.angle.toFixed(5));
-  $('.cliffSensor').text(msg.cliffSensor.toFixed(5));
+  console.log(msg);
+  $('.distance').text(msg.distance);
+  $('.angle').text(msg.angle);
+  $('.cliffFrontRightSignal').text(msg.cliffFrontRightSignal);
+  $('.cliffFrontLeftSignal').text(msg.cliffFrontLeftSignal);
+  $('.cliffRightSignal').text(msg.cliffRightSignal);
+  $('.cliffLeftSignal').text(msg.cliffLeftSignal);
+  /*
   $('.bumpSensor').text(msg.bumpSensor.toFixed(5));
   $('.dropSensor').text(msg.dropSensor.toFixed(5));
   $('.wall').text(msg.wall.toFixed(5));
   $('.velocity').text(msg.velocity.toFixed(5));
-  $('.encoderCount').text(msg.encoderCount.toFixed(5));
+  $('.encoderCount').text(msg.encoderCount.toFixed(5));*/
 });
 
 // TODO: animate numbers
@@ -57,17 +61,14 @@ $(document).keydown(function(e) {
     case 87: // W
     case 38: // up
       direction = 'up';
-      console.log("Up");
       break;
     case 68: // D
     case 39: // right
       direction = 'right';
-      console.log("Right");
       break;
     case 83: // S
     case 40: // down
       direction = 'down';
-      console.log("Down");
       break;
     default: return; // exit this handler for other keys
   }

@@ -44,19 +44,6 @@ function randNum(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-function sendRandom() {
-  socket.emit('sensor data', {
-    distance: randNum(1, 2),
-    angle: randNum(2, 3),
-    cliffSensor: randNum(4, 5),
-    bumpSensor: randNum(5, 6),
-    dropSensor: randNum(6, 7),
-    wall: randNum(7, 8),
-    velocity: randNum(8, 9),
-    encoderCount: randNum(9, 10),
-  });
-}
-
 io.on('connection', (socket) => {
   socket.on('change direction', (msg) => {
     let velocity = 0;
@@ -99,16 +86,7 @@ io.on('connection', (socket) => {
   });
 
   setInterval(() => {
-    socket.emit('sensor data', {
-      distance: randNum(1, 2),
-      angle: randNum(2, 3),
-      cliffSensor: randNum(4, 5),
-      bumpSensor: randNum(5, 6),
-      dropSensor: randNum(6, 7),
-      wall: randNum(7, 8),
-      velocity: randNum(8, 9),
-      encoderCount: randNum(9, 10),
-    });
+
   }, 1000);
 
 // draw takes e.beg_x,e.beg_y, e.end_x, e.end_y
@@ -131,9 +109,24 @@ setInterval(() => {
       json: true
     }, function (error, response, body) {
       if (!error && response.statusCode === 200) {
-        console.log(body) // Print the json response
+        //console.log(body) // Print the json response
         //coords = JSON.parse(body)
         var next = parse(body)
+
+        socket.emit('sensor data', {
+          distance: body.distance,
+          angle: body.angle,
+          cliffFrontRightSignal: body['cliff front right signal'],
+          cliffFrontLeftSignal: body['cliff front right signal'],
+          cliffRightSignal: body['cliff right signal'],
+          cliffLeftSignal: body['cliff left signal'],
+          cliffFrontRight: body['cliff front right'],
+          cliffFrontLeft: body['cliff front left'],
+          cliffLeft: body['cliff left'],
+          cliffRight: body['cliff right'],
+        });
+
+
         socket.emit('draw', {beg_x: position.x, beg_y : position.y, end_x : next.x + position.x , end_y : next.y + position.y});
         position.x = next.x;
         position.y = next.y;
