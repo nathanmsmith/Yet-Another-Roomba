@@ -13,9 +13,9 @@ app.use(express.static(__dirname + '/public'));
 
 var request = require('request');
 
-// Not required anymore. 
+// Not required anymore.
 //io.on('connection', function(socket) {
-//  socket.broadcast.emit('draw',{x: 0, y : 0}); // The starting point is always 0,0 for the trajectory plot.   
+//  socket.broadcast.emit('draw',{x: 0, y : 0}); // The starting point is always 0,0 for the trajectory plot.
 //})
 
 var coord_url = "http://localhost:666"
@@ -34,19 +34,13 @@ PythonShell.run('./scripts/start.py', (err) => {
   if (err) throw err;
   console.log('Connected to Rooomba.');
 });
-
+/*
 var pyshell = new PythonShell('./scripts/data.py');
 
 pyshell.on('message', function (message) {
   // received a message sent from the Python script (a simple "print" statement)
   console.log(message);
-});
-
-// end the input stream and allow the process to exit
-pyshell.end(function (err) {
-  if (err) throw err;
-  console.log('finished');
-});
+});*/
 
 function randNum(min, max) {
   return Math.random() * (max - min) + min;
@@ -103,7 +97,7 @@ io.on('connection', (socket) => {
      PythonShell.run('./scripts/move.py', {args: [velocity, radius]}, (err) => {
       if (err) throw err;
       console.log('Changed direction of to velocity:' + velocity + ', radius: ' + radius);
-    });  
+    });
   });
 
   setInterval(() => {
@@ -124,7 +118,7 @@ io.on('connection', (socket) => {
 //We must transform the directions given into an x y coord to display as a line
 function parse(body)
 {
-  //return {x : num, y : num} 
+  //return {x : num, y : num}
 }
 
 
@@ -144,18 +138,12 @@ setInterval(() => {
   request({
     url: coord_url,
     json: true
-}, function (error, response, body) {
-
+  }, function (error, response, body) {
     if (!error && response.statusCode === 200) {
         console.log(body) // Print the json response
-
     }
-});
-  }, 1000);
-
-
-
-// Nota Bene : Plotting the trajectory once per second will be too intensive for Chrome's canva implementation. RIP. 
+  });
+}, 1000);
 
 http.listen(3000, () => {
   console.log('listening on *:3000');
