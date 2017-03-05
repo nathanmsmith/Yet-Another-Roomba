@@ -72,7 +72,12 @@ $(document).keydown(function(e) {
     default: return; // exit this handler for other keys
   }
 
-  socket.emit('change direction', {distance: distance, instance: {direction: {angle: direction}}});
+  socket.emit('change direction', {
+    distance: distance,
+    direction: {
+      angle: direction
+    }
+  });
 
   e.preventDefault(); // prevent the default action (scroll / move caret)
 });

@@ -45,8 +45,9 @@ io.on('connection', (socket) => {
     let velocity = 0;
     let radius = 0;
 
-    if (typeof msg.instance.direction !== 'undefined') {
-      switch (msg.instance.direction.angle) {
+    if (typeof msg.direction !== 'undefined') {
+      console.log(msg.direction.angle);
+      switch (msg.direction.angle) {
         case 'up':
           velocity = 2 * msg.distance;
           break;
@@ -57,9 +58,7 @@ io.on('connection', (socket) => {
           break;
       }
 
-
-      console.log(msg.instance.direction.angle);
-      switch (msg.instance.direction.angle) {
+      switch (msg.direction.angle) {
         case 'right':
           radius = -1;
           break;
