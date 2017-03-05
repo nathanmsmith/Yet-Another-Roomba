@@ -83,7 +83,7 @@ io.on('connection', (socket) => {
      PythonShell.run('./scripts/move.py', {args: [velocity, radius]}, (err) => {
       if (err) throw err;
       console.log('Changed direction of to velocity:' + velocity + ', radius: ' + radius);
-    }); 
+    });  
   });
 
   setInterval(() => {
@@ -102,7 +102,7 @@ io.on('connection', (socket) => {
 // draw takes e.beg_x,e.beg_y, e.end_x, e.end_y
 
 setInterval(() => {
-    socket.emit('draw', {beg_x: randNum(0, 90), beg_y : randNum(0, 44), end_x : 1000 , end_y : 1000 });
+    //socket.emit('draw', {beg_x: randNum(0, 90), beg_y : randNum(0, 44), end_x : 1000 , end_y : 1000 });
     });
   }, 1000);
 
