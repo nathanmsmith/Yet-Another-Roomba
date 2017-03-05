@@ -25,8 +25,8 @@ PythonShell.run('./scripts/data.py', (err) => {
   console.log('Started server.');
 });
 
-position = {x : 0, y : 0};
-totalAngle = 0;
+var position = {x : 0, y : 0};
+var totalAngle = 0;
 
 PythonShell.run('./scripts/stop.py', (err) => {
   if (err) throw err;
@@ -138,7 +138,10 @@ setInterval(() => {
         //coords = JSON.parse(body)
         body.angle = totalAngle + body.angle;
         var next = parse(body)
-        socket.emit('draw', {beg_x: position.x, beg_y : position.y, end_x : next.x + position.x , end_y : next.y + position.y});
+        if(next.distance != 0 && next.angle != 0)
+        {
+          socket.emit('draw', {beg_x: position.x, beg_y : position.y, end_x : next.x + position.x , end_y : next.y + position.y});
+        }
         position.x = next.x;
         position.y = next.y;
       }
