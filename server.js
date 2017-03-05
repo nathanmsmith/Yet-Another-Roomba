@@ -118,6 +118,9 @@ io.on('connection', (socket) => {
 //We must transform the directions given into an x y coord to display as a line
 function parse(body)
 {
+  x_coord = Math.cos(body.Angle) * 180/Math.PI
+  y_coord = Math.sin(dody.Angle) * 180/Math.PI
+  return {x : x_coord, y : y_coord}
   //return {x : num, y : num}
 }
 
@@ -141,6 +144,11 @@ setInterval(() => {
   }, function (error, response, body) {
     if (!error && response.statusCode === 200) {
         console.log(body) // Print the json response
+        coords = JSON.parse(body)
+        next = parse(coords)
+        socket.emit('draw', {beg_x: position.x, beg_y : position.y, end_x : next.x + position.x , end_y : next.y + position.y});
+        position.x = next.x;
+        position.y = next.y;
     }
   });
 }, 1000);
