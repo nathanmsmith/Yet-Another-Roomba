@@ -11,6 +11,11 @@ app.use('/', router);
 
 app.use(express.static(__dirname + '/public'));
 
+io.on('connection', function(socket) {
+  socket.broadcast.emit('draw',{x: 0, y : 0}); // The starting point is always 0,0 for the trajectory plot.   
+})
+
+
 PythonShell.run('./scripts/stop.py', (err) => {
   if (err) throw err;
   console.log('Closed Rooomba.');
@@ -87,10 +92,10 @@ io.on('connection', (socket) => {
     }
 
     //console.log('Direction changed: ' + msg.direction.angle);
-    PythonShell.run('./scripts/move.py', {args: [velocity, radius]}, (err) => {
+     PythonShell.run('./scripts/move.py', {args: [velocity, radius]}, (err) => {
       if (err) throw err;
       console.log('Changed direction of to velocity:' + velocity + ', radius: ' + radius);
-    });
+    }); 
   });
 
   setInterval(() => {
@@ -105,7 +110,13 @@ io.on('connection', (socket) => {
       encoderCount: randNum(9, 10),
     });
   }, 1000);
-});
+
+setInterval(() => {
+    socket.emit('draw', {x: randNum(0, 90), y : randNum(0, 44)});
+    });
+  }, 1000);
+
+
 
 http.listen(3000, () => {
   console.log('listening on *:3000');
