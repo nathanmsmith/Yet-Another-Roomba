@@ -25,7 +25,8 @@ PythonShell.run('./scripts/data.py', (err) => {
   console.log('Started server.');
 });
 
-position = {x : 0, y : 0};
+var position = {x : 0, y : 0};
+var totalAngle = 0;
 
 PythonShell.run('./scripts/stop.py', (err) => {
   if (err) throw err;
@@ -91,18 +92,20 @@ io.on('connection', (socket) => {
 
 // draw takes e.beg_x,e.beg_y, e.end_x, e.end_y
 
+
+//We must transform the directions given into an x y coord to display as a line
+function parse(body)
+{
+  var x_coord = Math.cos(body.angle) * 180/Math.PI * body.distance
+  var y_coord = Math.sin(body.angle) * 180/Math.PI * body.distance
+  return {x : x_coord, y : y_coord}
+  //return {x : num, y : num}
+}
+
 /*
  * Get the coordinates at regular interval to trigger a draw event
  */
 setInterval(() => {
-
-  //We must transform the directions given into an x y coord to display as a line
-  function parse(body) {
-    x_coord = Math.cos(body.angle) * 180/Math.PI
-    y_coord = Math.sin(body.angle) * 180/Math.PI
-    return {x : x_coord, y : y_coord}
-    //return {x : num, y : num}
-  }
 
     request({
       url: coord_url,
@@ -111,7 +114,9 @@ setInterval(() => {
       if (!error && response.statusCode === 200) {
         //console.log(body) // Print the json response
         //coords = JSON.parse(body)
+        body.angle = totalAngle + body.angle;
         var next = parse(body)
+<<<<<<< HEAD
 
         socket.emit('sensor data', {
           distance: body.distance,
@@ -128,6 +133,12 @@ setInterval(() => {
 
 
         socket.emit('draw', {beg_x: position.x, beg_y : position.y, end_x : next.x + position.x , end_y : next.y + position.y});
+=======
+        if(next.distance != 0 && next.angle != 0)
+        {
+          socket.emit('draw', {beg_x: position.x + 500, beg_y : position.y + 500, end_x : next.x + position.x + 500 , end_y : next.y + position.y + 500});
+        }
+>>>>>>> 52acb94d1d21b4c6ca965a0df04cd4df97071401
         position.x = next.x;
         position.y = next.y;
       }
