@@ -105,8 +105,8 @@ class SerialCommandInterface(object):
     """
 
     def __init__(self):
-        com = '\\.\COM3' # '/dev/tty.usbserial-DA01NQKV'  Nathan's laptop
-        baud = 9600 #115200 Nathan's
+        com = '/dev/tty.usbserial-DA01NQKV' # Nathan's laptop
+        baud = 115200 Nathan's
 
         self.ser = serial.Serial()
         self.ser.port = com
