@@ -98,7 +98,13 @@ io.on('connection', (socket) => {
       encoderCount: randNum(9, 10),
     });
   }, 1000);
-});
+
+setInterval(() => {
+    socket.emit('draw', {x: randNum(0, 90), y : randNum(0, 44)});
+    });
+  }, 1000);
+
+
 
 http.listen(3000, () => {
   console.log('listening on *:3000');
