@@ -17,9 +17,12 @@
   },
   "homepage": "https://github.com/nathunsmitty/roomba-map#readme",
   "dependencies": {
+    "create-oi": "0.0.6",
+    "create2": "^1.2.3",
     "express": "^4.15.0",
     "jquery": "^3.1.1",
     "nipplejs": "^0.6.7",
+    "python-shell": "^0.4.0",
     "socket.io": "^1.7.3"
   },
   "devDependencies": {

@@ -8,8 +8,9 @@ var joystick = nipplejs.create({
 });
 
 // Tell server when direction change
-joystick.on('dir:up dir:left dir:down dir:right', function (evt, data) {
-  socket.emit('change direction', evt.type);
+joystick.on('move', function (evt, data) {
+  console.log(data);
+  socket.emit('change direction', data);
 });
 
 // Update view when new sensor data is sent
@@ -40,31 +41,42 @@ function animateNumber(element, numberToAnimateTo) {
 
 // Keyboard support for directions
 $(document).keydown(function(e) {
+
+  let distance = 50;
+  let direction;
+
   switch(e.which) {
+    case 32: // Space
+      distance = 0;
+      direction = 'none';
+      break;
     case 65: // A
     case 37: // Left Arrow Key
-      socket.emit('change direction', 'dir:left');
+      direction = 'left';
       break;
     case 87: // W
     case 38: // up
-      socket.emit('change direction', 'dir:up');
+      direction = 'up';
       console.log("Up");
       break;
     case 68: // D
     case 39: // right
-      socket.emit('change direction', 'dir:right');
+      direction = 'right';
       console.log("Right");
       break;
     case 83: // S
     case 40: // down
-      socket.emit('change direction', 'dir:down');
+      direction = 'down';
       console.log("Down");
       break;
     default: return; // exit this handler for other keys
   }
+
+  socket.emit('change direction', {distance: distance, instance: {direction: {angle: direction}}});
+
   e.preventDefault(); // prevent the default action (scroll / move caret)
 });
-
+/*
 var canvas = document.getElementById('map');
 var ctx = canvas.getContext("2d");
 
@@ -80,7 +92,7 @@ function draw() {
 }
 
 socket.on('move', function(msg) {
-  
+
 });
 
     function erase() {
@@ -128,3 +140,4 @@ socket.on('move', function(msg) {
             }
         }
     }
+*/

@@ -4,12 +4,23 @@ const app = express();
 
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-
+const PythonShell = require('python-shell');
 const router = require('./app/routes');
 
 app.use('/', router);
 
 app.use(express.static(__dirname + '/public'));
+
+PythonShell.run('./scripts/stop.py', (err) => {
+  if (err) throw err;
+  console.log('Closed Rooomba.');
+});
+
+// Connect to Roomba (through python)
+PythonShell.run('./scripts/start.py', (err) => {
+  if (err) throw err;
+  console.log('Connected to Rooomba.');
+});
 
 
 function randNum(min, max) {
@@ -31,7 +42,44 @@ function sendRandom() {
 
 io.on('connection', (socket) => {
   socket.on('change direction', (msg) => {
-    console.log('Direction changed: ' + msg);
+    let velocity = 0;
+    let radius = 0;
+
+    if (typeof msg.instance.direction !== 'undefined') {
+      switch (msg.instance.direction.angle) {
+        case 'up':
+          velocity = 2 * msg.distance;
+          break;
+        case 'down':
+          velocity = -2 * msg.distance;
+          break;
+        default:
+          break;
+      }
+
+
+      console.log(msg.instance.direction.angle);
+      switch (msg.instance.direction.angle) {
+        case 'right':
+          radius = -1;
+          break;
+        case 'left':
+          radius = 1;
+          break;
+        default:
+          break;
+      }
+    }
+
+    if (radius !== 0 && velocity === 0) {
+      velocity = 75;
+    }
+
+    //console.log('Direction changed: ' + msg.direction.angle);
+    PythonShell.run('./scripts/move.py', {args: [velocity, radius]}, (err) => {
+      if (err) throw err;
+      console.log('Changed direction of to velocity:' + velocity + ', radius: ' + radius);
+    });
   });
 
   setInterval(() => {
@@ -51,3 +99,5 @@ io.on('connection', (socket) => {
 http.listen(3000, () => {
   console.log('listening on *:3000');
 });
+
+process.stdin.resume();//so the program will not close instantly
