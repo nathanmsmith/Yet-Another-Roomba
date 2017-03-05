@@ -137,6 +137,7 @@ setInterval(() => {
         console.log(body) // Print the json response
         //coords = JSON.parse(body)
         body.angle = totalAngle + body.angle;
+        totalAngle = body.angle;
         var next = parse(body)
         if(next.distance != 0 && next.angle != 0)
         {
