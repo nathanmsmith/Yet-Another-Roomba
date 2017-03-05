@@ -114,6 +114,7 @@ io.on('connection', (socket) => {
 
 // draw takes e.beg_x,e.beg_y, e.end_x, e.end_y
 
+
 //We must transform the directions given into an x y coord to display as a line
 function parse(body)
 {
@@ -123,34 +124,26 @@ function parse(body)
   //return {x : num, y : num}
 }
 
-
-
-setInterval(() => {
-    //next = parse(body);
-    //socket.emit('draw', {beg_x: position.x, beg_y : position.y, end_x : next.x , end_y : next.y});
-    //position.x = next.x;
-    //position.y = next.y;
-    });
-  }, 1000);
-
 /*
  * Get the coordinates at regular interval to trigger a draw event
  */
 setInterval(() => {
-  request({
-    url: coord_url,
-    json: true
-  }, function (error, response, body) {
-    if (!error && response.statusCode === 200) {
+
+    request({
+      url: coord_url,
+      json: true
+    }, function (error, response, body) {
+      if (!error && response.statusCode === 200) {
         console.log(body) // Print the json response
-        coords = JSON.parse(body)
-        next = parse(coords)
+        //coords = JSON.parse(body)
+        var next = parse(body)
         socket.emit('draw', {beg_x: position.x, beg_y : position.y, end_x : next.x + position.x , end_y : next.y + position.y});
         position.x = next.x;
         position.y = next.y;
-    }
-  });
-}, 1000);
+      }
+    });
+  }, 1000);
+});
 
 http.listen(3000, () => {
   console.log('listening on *:3000');
